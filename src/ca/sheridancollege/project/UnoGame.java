@@ -25,7 +25,6 @@ public class UnoGame extends Game {
     
     @Override
     public void play() {
-        
         //code to play
     }
 
@@ -34,7 +33,7 @@ public class UnoGame extends Game {
         for(Player player: getPlayers()){
             if (((UnoPlayer)player).getHand().isEmpty()){
                 System.out.println(player.getName()+" has won.");
-                System.exit(0);
+                break;
             }
         }
     }

@@ -22,7 +22,6 @@ public class UnoPlayer extends Player {
 
     @Override
     public void play() {
-
         //code to play
     }
 }

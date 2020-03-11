@@ -17,6 +17,6 @@ public class WildCard extends UnoCard{
     }
 
     public void setCardColor(Colors color){
-        this.cardColor = cardColor;
+        this.cardColor = color;
     }
 }
