@@ -7,11 +7,11 @@ package ca.sheridancollege.project;
 
 /**
  * A class to be used as the base Card class for the project. Must be general enough to be instantiated for any Card
- * game. Students wishing to add to the code should remember to add themselves as a modifier.
+ * game. 
  *
  * @author dancye
  * GROUP 7:
- * @modified Mariana Baroni - February 12, 2020
+ * @modified Mariana Baroni - March 10, 2020
  * @modified Danish Siddiqui - February 12, 2020
  * @modified Husam Haidarah - February 12, 2020
  * @modified Katrina Metha - February 12, 2020

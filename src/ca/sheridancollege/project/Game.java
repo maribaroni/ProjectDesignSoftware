@@ -14,14 +14,14 @@ import java.util.ArrayList;
  * @author dancye
  * @modified Paul Bonenfant Jan 2020
  * GROUP 7:
- * @modified Mariana Baroni - February 12, 2020
+ * @modified Mariana Baroni - March 10, 2020
  * @modified Danish Siddiqui - February 12, 2020
  * @modified Husam Haidarah - February 12, 2020
  * @modified Katrina Metha - February 12, 2020
  */
 public abstract class Game {
 
-    private final String name;//the title of the game
+    final String name;//the title of the game
     private ArrayList<Player> players;// the players of the game
 
     public Game(String name) {
