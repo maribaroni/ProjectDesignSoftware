@@ -1,10 +1,7 @@
 package group7unogame;
 
-import group7unogame.model.Card;
 import group7unogame.model.Game;
-import group7unogame.model.GroupOfCards;
 import group7unogame.model.Player;
-import group7unogame.model.UnoCard;
 import group7unogame.model.UnoDeck;
 import group7unogame.model.UnoGame;
 import group7unogame.model.UnoPlayer;
@@ -18,7 +15,7 @@ import java.util.regex.Pattern;
  *
  * GROUP 7:
  *
- * @modified Mariana Baroni - March 10, 2020
+ * @modified Mariana Baroni - April 10, 2020
  * @modified Danish Siddiqui - February 12, 2020
  * @modified Husam Haidarah - February 12, 2020
  * @modified Katrina Metha - February 12, 2020
@@ -53,22 +50,19 @@ public class PlayAGame {
             //Ask which game they want to play
             System.out.println("\nWhat card game do you wanna to play? Digit 1 for Uno or 0 to exit the application.");
             //Validate input
-            try {
-                gameChosen = input.nextLine();
-                if (!Pattern.matches(regex1, gameChosen)) {
-                    do {
-                        System.out.println("Please enter the number 0 or the number 1.");
-                        gameChosen = input.nextLine();
-                    } while (!Pattern.matches(regex1, gameChosen));
-                }
-            } catch (InputMismatchException ex) {
-                System.out.println("Please enter the number 0 or the number 1.");
+            gameChosen = input.nextLine();
+            if (!Pattern.matches(regex1, gameChosen)) {
+                do {
+                    System.out.println("Please enter the number 0 or the number 1.");
+                    gameChosen = input.nextLine();
+                } while (!Pattern.matches(regex1, gameChosen));
             }
 
             //Chose the game according to the user input (other games can be added for each case)
             switch (gameChosen) {
 
                 case "0":
+                    
                     break;
 
                 case "1":
@@ -78,19 +72,15 @@ public class PlayAGame {
 
                     //Ask how many players
                     System.out.println("How many players are playing today (choose a number between 2 and 4)?");
-                    String regex2 = "[2-4]{1}";
+                    numberOfPlayers = input.nextLine();
+                    String regex2 = "[234]{1}";
 
                     //Validate input
-                    try {
-                        numberOfPlayers = input.nextLine();
-                        if (!Pattern.matches(regex2, numberOfPlayers)) {
-                            do {
-                                System.out.println("Please enter a number between 2 and 4.");
-                                numberOfPlayers = input.nextLine();
-                            } while (!Pattern.matches(regex2, numberOfPlayers));
-                        }
-                    } catch (InputMismatchException ex) {
-                        System.out.println("Please enter a number between 2 and 4.");
+                    if (!Pattern.matches(regex2, numberOfPlayers)) {
+                        do {
+                            System.out.println("Please enter a number between 2 and 4.");
+                            numberOfPlayers = input.nextLine();
+                        } while (!Pattern.matches(regex2, numberOfPlayers));
                     }
 
                     //Create an ArrayList of Uno Players
@@ -101,28 +91,14 @@ public class PlayAGame {
                         players.add((UnoPlayer) player);
                     }
                     
-                    //PRINT PLAYERS
-                    /*for(Player i : players){
-                        System.out.println(i.getName());
-                    }*/
-
-                    
-                    
-                    //PRINT HAND OF PLAYERS
-                    /* for (Player player : players){
-                        ArrayList<Card> cardsHand = ((UnoPlayer)player).getHand();
-                        for (Card i : cardsHand){
-                            System.out.println(i.toString());
-                        }
-                    }*/
+                    //Set Players
+                    uno.setPlayers(players);
 
                     //Run the game
                     while (true) {
                         uno.play();
                     }
-
             }
-
         }  while (false); 
     }
     

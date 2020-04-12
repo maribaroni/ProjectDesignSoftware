@@ -1,12 +1,12 @@
 package group7unogame.model;
 
 /**
- * A class that models each Player in the game. Players have an identifier, which should be unique.
+ * A class that models each Player in the game with a unique identifier.
  *
  * @author dancye
  * GROUP 7:
  * @modified Paul Bonenfant Jan 2020
- * @modified Mariana Baroni - March 10, 2020
+ * @modified Mariana Baroni - April 10, 2020
  * @modified Danish Siddiqui - February 12, 2020
  * @modified Husam Haidarah - February 12, 2020
  * @modified Katrina Metha - February 12, 2020

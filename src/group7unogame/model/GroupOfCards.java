@@ -1,7 +1,6 @@
 package group7unogame.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * A concrete class that represents any grouping of cards for a Game. HINT, you might want to subclass this more than
@@ -10,7 +9,7 @@ import java.util.Collections;
  * @author dancye
  * @modified Paul Bonenfant Jan 2020
  * GROUP 7:
- * @modified Mariana Baroni - March 10, 2020
+ * @modified Mariana Baroni - April 10, 2020
  * @modified Danish Siddiqui - February 12, 2020
  * @modified Husam Haidarah - February 12, 2020
  * @modified Katrina Metha - February 12, 2020

@@ -5,7 +5,7 @@ package group7unogame.model;
  *
  * GROUP 7:
  *
- * @modified Mariana Baroni - March 10, 2020
+ * @modified Mariana Baroni - April 11, 2020
  * @modified Danish Siddiqui - March, 2020
  * @modified Husam Haidarah - March, 2020
  * @modified Katrina Metha - March, 2020
@@ -44,4 +44,5 @@ public class UnoCard extends Card {
     public String toString() {
         return cardColor +" "+cardValue;
     }
+    
 }
