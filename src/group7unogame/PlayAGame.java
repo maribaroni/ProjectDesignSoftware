@@ -1,13 +1,10 @@
 package group7unogame;
 
 import group7unogame.model.Game;
-import group7unogame.model.GroupOfCards;
 import group7unogame.model.Player;
-import group7unogame.model.UnoDeck;
 import group7unogame.model.UnoGame;
 import group7unogame.model.UnoPlayer;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -25,7 +22,6 @@ public class PlayAGame {
         //Data field
         Scanner input = new Scanner(System.in);
         String numberOfPlayers = "-1";
-        // UnoDeck drawPile = new UnoDeck();
         String gameChosen = "-1";
 
         final int handSize = 4;
@@ -33,13 +29,6 @@ public class PlayAGame {
         //Greeting players
         System.out.println("***** WELCOME PLAYERS *****");
 
-        //PRINT DECK
-        /* UnoDeck deckUno = new UnoDeck();
-        deckUno.generateDeck();
-        ArrayList<UnoCard> cards = deckUno.getUnoCards();
-        for ( Card i : cards){
-            System.out.println(i.toString());
-        }*/
         // A loop that presents options to the user until he wants to exit the application
         String regex1 = "[01]{1}";
         do {
