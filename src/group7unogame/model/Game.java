@@ -7,16 +7,13 @@ import java.util.ArrayList;
  * given.
  *
  * @author dancye
- * @modified Paul Bonenfant Jan 2020
- * GROUP 7:
- * @modified Mariana Baroni - April 10, 2020
- * @modified Danish Siddiqui - February 12, 2020
- * @modified Husam Haidarah - February 12, 2020
+ * @modified Paul Bonenfant Jan 2020 GROUP 7:
+ * @modified Mariana Baroni - April 17, 2020
  * @modified Katrina Metha - February 12, 2020
  */
 public abstract class Game {
 
-    final String name;//the title of the game
+    private final String name;//the title of the game
     protected ArrayList<Player> players;// the players of the game
 
     public Game(String name) {

@@ -6,15 +6,14 @@ import java.util.ArrayList;
 /**
  * This class represents the rules of a Uno Game.
  *
- * @author Mariana Baroni - April 11, 2020
+ * @author Mariana Baroni - April 17, 2020
  */
 public class UnoGame extends Game {
 
     private static UnoDeck drawPile;
-    public UnoDeck discardPile;
+    private ArrayList<Card> discardPile = new ArrayList<>();
     public static UnoCard cardOnTop;
-
-    static final int HAND_SIZE = 4;
+    static final int HAND_SIZE = 10;
 
     public UnoGame(String name) {
         super(name);
@@ -27,7 +26,7 @@ public class UnoGame extends Game {
         ArrayList<Player> players = super.players;
 
         //Preparing the deck 
-        drawPile.generateDeck(); //generating Uno deck
+        drawPile.generateDeck();
         drawPile.shuffle(); //Shuffle the cards
 
         //Preparing the hand of players
@@ -42,19 +41,13 @@ public class UnoGame extends Game {
         setPlayers(players);
 
         //Set up the card on top
-        cardOnTop = topCard(drawPile);
-        System.out.printf("\nThe card on top is: " + cardOnTop.toString());
-
-        //Stores the cards discarded (previous cards on Top)
-        ArrayList<Card> cardsDiscarded = new ArrayList<>();
-
-        //Stores the card played by the player
-        UnoCard cardDiscarded;
-
-        //Stores de color of the card 
-        Colors color;
+        cardOnTop = ((UnoCard) topCard(drawPile));
+        System.out.println("\nThe card on top is: " + cardOnTop.toString());
 
         do { //do until the declaration of winner
+
+            //Stores the card played by the player
+            UnoCard cardDiscarded = null;
 
             for (int i = 0; i < players.size(); i++) {
 
@@ -62,113 +55,71 @@ public class UnoGame extends Game {
                 Player player = players.get(i);
 
                 //Stores de color of the card on top in case of the Wildcard is played.
-                color = cardOnTop.getCardColor();
+                Colors color = cardOnTop.getCardColor();
+
+                //Presents the current player
+                System.out.println("\n\n***** " + player.getName() + "'s turn *****");
 
                 do { //player makes a movement
 
                     player.play(); //Invoke play method
 
                     //Get the card played by the player 
-                    cardDiscarded = ((UnoPlayer) player).getCardPlayed();
+                    cardDiscarded = getCardPlayed();
 
                     //If the card of player is a instance of WildCard, setup the color of card 
                     //according to the previous card on top
                     if (cardDiscarded instanceof WildCard) {
                         System.out.printf("\nThe card on top now is: "
                                 + ((WildCard) cardDiscarded).toString() + " " + color);
-                        cardsDiscarded.add((UnoCard) cardOnTop); //update the discard Pile
+                        ((WildCard) cardDiscarded).setCardColor(color);
                         cardOnTop = cardDiscarded; //update card on top
                         break;
                     } else {
                         //Validates the movement of player
                         if (cardOnTop instanceof WildCard
-                                && !cardDiscarded.getCardColor().equals(color)) {
+                                && (!(cardDiscarded.getCardColor().equals(color)))) {
                             System.out.println("Invalid movement. Try Again!");
                             ((UnoPlayer) player).addCardToHand(cardDiscarded); //gives back the card for the user
-                            player.play(); //Invoke play method
-                        } else if (cardOnTop instanceof WildCard
+                        }
+                        if (cardOnTop instanceof WildCard
                                 && cardDiscarded.getCardColor().equals(color)) {
                             System.out.println("\nThe card on top now is: " + ((UnoCard) cardDiscarded).toString());
-                            cardsDiscarded.add((UnoCard) cardOnTop); //update the discard pile
                             cardOnTop = cardDiscarded; //update card on top
                             break;
+                        }
+                        if (!cardDiscarded.getCardValues().equals(cardOnTop.getCardValues())
+                                && (!cardDiscarded.getCardColor().equals(cardOnTop.getCardColor()))) {
+                            System.out.println("Invalid movement. Try Again!");
+                            ((UnoPlayer) player).addCardToHand(cardDiscarded); //gives back the card for the user
                         } else {
-                            if (!cardDiscarded.getCardValues().equals(cardOnTop.getCardValues())
-                                    && (!cardDiscarded.getCardColor().equals(cardOnTop.getCardColor()))) {
-                                System.out.println("Invalid movement. Try Again!");
-                                //System.out.printf("\nThe card on top is: " + ((UnoCard) cardOnTop).toString());
-                                ((UnoPlayer) player).addCardToHand(cardDiscarded); //gives back the card for the user
-                                player.play(); //Invoke play method
-                            } else {
-                                System.out.println("\nThe card on top now is: " + ((UnoCard) cardDiscarded).toString());
-                                cardsDiscarded.add((UnoCard) cardOnTop); //update the discard pile
-                                cardOnTop = cardDiscarded; //update card on top
-                                break;
-                            }
+                            System.out.println("\nThe card on top now is: " + ((UnoCard) cardDiscarded).toString());
+                            cardOnTop = cardDiscarded; //update card on top
+                            break;
                         }
-                    }
-
-                    //Update the color stored 
-                    if (cardOnTop instanceof WildCard) {
-                        for (int k = cardsDiscarded.size() - 2; k >= 0; k--) {
-                            if (cardsDiscarded.get(k) instanceof WildCard) {
-                                continue;
-                            } else {
-                                color = ((UnoCard) cardsDiscarded.get(k)).getCardColor();
-                            }
-                        }
-                    } else {
-                        color =  cardOnTop.getCardColor();
-                    }
-
-                    /*//Update the color stored 
-                    //In case of other wildcard is played, gets the previous color on the discard pile
-                    if  ( !(cardDiscarded instanceof WildCard) ){
-                        color = cardOnTop.getCardColor();
-                    }
-                    else{
-                        for (int k = cardsDiscarded.size()-1; k >= 0; k--){
-                            if (cardsDiscarded.get(k) instanceof WildCard){
-                               continue;
-                            }else {
-                                color = ((UnoCard)cardsDiscarded.get(k)).getCardColor(); 
-                            }     
-                        }
-                    }
-                    System.out.println(color);*/
-                    //In case of other wildcard is played, gets the previous color on the discard pile
-                    /*      int k = 1;
-                        Card previusCard;
-                        do{ 
-                           previusCard = (UnoCard)cardsDiscarded.get(cardsDiscarded.size()-k);
-                                   //discardPile.getUnoCards().get(discardPile.getSize() - k);
-                           k++;
-                        } while ( (previusCard instanceof WildCard) );
-                        color = previusCard.getCardColor();
-                    }  else {
-                        color = cardOnTop.getCardColor();
-                    }*/
-                    //Update the deck of discard pile
-                    discardPile.setCards(cardsDiscarded);
-
-                    //Verifies if there are cards on the draw pile. 
-                    //If not, replaces drawPile with the discardPile shuffled,
-                    //to be used in case of all the cards on draw deck were used.
-                    if (drawPile.getSize() < 1) {
-                        discardPile.shuffle();
-                        drawPile = discardPile;
                     }
 
                 } while (true);
 
-                //Verifies if there is a winner
-                if (((UnoPlayer) player).getHand().isEmpty()) {
-                    System.out.printf("\n" + player.getName());
-                    declareWinner();
-                    players.clear();
-                    drawPile.setSize(0);
-                    break;
+                //Update the dicardPile
+                discardPile.add(cardDiscarded);
+
+                //Verifies if there are cards on the draw pile. 
+                //If not, replaces drawPile with the discardPile shuffled,
+                //to be used in case of all the cards on draw deck were used.
+                if (drawPile.getUnoCards().size() <= 1) {
+                    try {
+                        drawPile.setCards(discardPile);
+                        drawPile.shuffle();
+                    } catch (NullPointerException | IndexOutOfBoundsException ex) {
+                        System.out.println("\nAll cards are with the players! Game is over!");
+                        System.exit(0);
+                    }
+
                 }
+
+                declareWinner();
+
             }
 
         } while (true);
@@ -180,14 +131,12 @@ public class UnoGame extends Game {
      */
     @Override
     public void declareWinner() {
-        /* for (Player player : getPlayers()) {
+        for (Player player : getPlayers()) {
             if (((UnoPlayer) player).getHand().isEmpty()) {
-                System.out.println(player.getName() + " has won.");
-                break;
+                System.out.println("\n" + player.getName() + " has won.");
+                System.exit(0);
             }
-        } 
-        notStopTheGame = false;*/
-        System.out.println(" is the winner");
+        }
     }
 
     /**
@@ -220,6 +169,15 @@ public class UnoGame extends Game {
         drawPile.getUnoCards().remove(card); //remove the card from the deck
         ((UnoPlayer) player).addCardToHand(card); //add a Card to the hand's player
         drawPile.setSize(drawPile.getUnoCards().size()); //set the new size to the deck
+    }
+
+    /**
+     * To get the card played by the player
+     *
+     * @return
+     */
+    public UnoCard getCardPlayed() {
+        return UnoPlayer.cardPlayed;//unoCard;
     }
 
 }

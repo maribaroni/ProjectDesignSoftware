@@ -2,21 +2,42 @@ package group7unogame.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-        
+
 /**
  * This class represents a deck of Uno cards.
- * 
- * @author Mariana Baroni - April 10, 2020
+ *
+ * @author Mariana Baroni - April 17, 2020
  */
 public class UnoDeck extends GroupOfCards {
-    
+
     private final int SIZE = 44;
     private ArrayList<UnoCard> unoCards = new ArrayList<>(SIZE);
     private final int SIZE_WILDCARDS = 4;
-    
+
+    /**
+     * No-arg constructor to initialize the decks.
+     */
+    public UnoDeck() {
+    }
+
+    /**
+     * Two-arg constructor to initialize a deck
+     *
+     * @param cards
+     * @param size
+     */
+    public UnoDeck(ArrayList<Card> cards, int size) {
+        super(cards, size);
+    }
+
+    /**
+     * Method responsible for generate a Uno Deck with regular and wildcards
+     *
+     * @return
+     */
     public ArrayList<UnoCard> generateDeck() {
-        
-        if ( unoCards.isEmpty() ) {
+
+        if (unoCards.isEmpty()) {
             //Regular Uno Cards
             for (UnoCard.Colors color : UnoCard.Colors.values()) {
                 for (UnoCard.Values value : UnoCard.Values.values()) {
@@ -25,24 +46,37 @@ public class UnoDeck extends GroupOfCards {
             }
             //WildCards
             for (int i = 0; i < SIZE_WILDCARDS; i++) {
-                unoCards.add(new WildCard("WildCard Any Color", null));
+                unoCards.add(new WildCard("WildCard", null));
             }
-        } 
-        
+        }
+
         return (unoCards);
     }
 
+    /**
+     * Getter method
+     *
+     * @return
+     */
     public ArrayList<UnoCard> getUnoCards() {
         return unoCards;
     }
 
-    public void setUnoCards(ArrayList<UnoCard> unoCards) {
-        this.unoCards = unoCards;
-    }
-   
+    /**
+     * Method responsible for shuffle the cards
+     */
     @Override
     public void shuffle() {
         Collections.shuffle(unoCards);
     }
-    
+
+    /**
+     * Method responsible for add one card to the deck (in case a discard pile, for example)
+     *
+     * @param card
+     */
+    public void addToDeck(UnoCard card) {
+        unoCards.add(card);
+    }
+
 }

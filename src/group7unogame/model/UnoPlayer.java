@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 /**
  * This class represents a Uno Player, with name and a group of cards.
  *
- * @author Mariana Baroni
+ * @author Mariana Baroni - April 17, 2020
  */
 public class UnoPlayer extends Player {
 
@@ -26,9 +26,9 @@ public class UnoPlayer extends Player {
         this.hand = hand;
     }
 
-    Scanner input = new Scanner(System.in);
-    UnoCard cardPlayed;
-    
+    private Scanner input = new Scanner(System.in);
+    public static UnoCard cardPlayed;
+
     int countCards; //counter of options to the user
     int counter = 0;
 
@@ -38,13 +38,10 @@ public class UnoPlayer extends Player {
         //Store options in integers to the user 
         ArrayList<Integer> counterCards = new ArrayList<>();
 
-        //Presents the current player
-        System.out.printf("\n\n***** " + getName() + "'s turn *****\n");
-
         countCards = 0; //counter of options to the user
 
-        //Presents the hand of cards to the user
-        System.out.println("Choose a card: ");
+        //The user hand of cards 
+        System.out.println("\nChoose a card: ");
         for (Card cards : getHand()) {
             countCards++;
             System.out.println(countCards + ". " + ((UnoCard) cards).toString());
@@ -64,12 +61,11 @@ public class UnoPlayer extends Player {
         //Regular expression of options
         String regex = "[0-9]{1,}";
 
-        String userEnter = null; //input of user
         int userEnterInt = -1; //input of user in integer type
-        
+
         //Validation of user entry
         do {
-            userEnter = input.nextLine();
+            String userEnter = input.nextLine();
             try {
                 userEnterInt = Integer.parseInt(userEnter);
                 if (Pattern.matches(regex, userEnter) && !counterCards.contains(userEnterInt)) {
@@ -83,20 +79,19 @@ public class UnoPlayer extends Player {
         } while (true);
 
         //Play a card from the hand
-        
-        if (counter == 0 && userEnterInt == countCards){
+        if (counter == 0 && userEnterInt == countCards) {
             counter = 1; //the user can pick a card once
             UnoGame.pickUpCards(this, 1);
-            play();  
+            play(); //return to the card options 
         } else if (userEnterInt == 0) {
             cardPlayed = UnoGame.cardOnTop;
             counter = 0;
         } else {
-            cardPlayed = (UnoCard)(getHand().get(userEnterInt - 1));
+            cardPlayed = (UnoCard) (getHand().get(userEnterInt - 1));
             hand.remove(cardPlayed);
             counter = 0;
         }
-        
+
         //verifies and say Uno
         sayUno();
 
@@ -104,7 +99,8 @@ public class UnoPlayer extends Player {
 
     /**
      * Add a card to the player's hand of cards
-     * @param card 
+     *
+     * @param card
      */
     public void addCardToHand(Card card) {
         hand.add(card);
@@ -115,16 +111,8 @@ public class UnoPlayer extends Player {
      */
     public void sayUno() {
         if (getHand().size() == 1) {
-            System.out.println("\n" + this.getName() +" says \n------UNO------.");
+            System.out.print("\n-----" + this.getName() + " says UNO------.\n");
         }
-    }
-
-    /**
-     * To get the card played by the player
-     * @return 
-     */
-    public UnoCard getCardPlayed() {
-        return this.cardPlayed;//unoCard;
     }
 
 }

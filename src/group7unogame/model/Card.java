@@ -2,13 +2,10 @@ package group7unogame.model;
 
 /**
  * A class to be used as the base Card class for the project. Must be general enough to be instantiated for any Card
- * game. 
+ * game.
  *
- * @author dancye
- * GROUP 7:
- * @modified Mariana Baroni - March 10, 2020
- * @modified Danish Siddiqui - February 12, 2020
- * @modified Husam Haidarah - February 12, 2020
+ * @author dancye GROUP 7:
+ * @modified Mariana Baroni - April 17, 2020
  * @modified Katrina Metha - February 12, 2020
  */
 public abstract class Card {

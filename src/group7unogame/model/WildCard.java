@@ -1,26 +1,24 @@
 package group7unogame.model;
 
 /**
- * This class represents a wildcard. It is general enough to be instantiated for any Game.
+ * This class represents a wildcard. It is general enough to be instantiated for any Game. 
+ * In case of UnoGame, the wildcard inherent color.
  *
  * GROUP 7:
  *
- * @modified Mariana Baroni - April 11, 2020
- * @modified Danish Siddiqui - March, 2020
- * @modified Husam Haidarah - March, 2020
- * @modified Katrina Metha - March, 2020
+ * @modified Mariana Baroni - April 17, 2020
  */
 public class WildCard extends UnoCard {
 
     private String name;
-   
+
     public WildCard(String name, Colors cardColor) {
         super(cardColor);
         this.name = name;
     }
 
     @Override
-    public String toString(){ 
+    public String toString() {
         return name;
     }
 
@@ -28,4 +26,12 @@ public class WildCard extends UnoCard {
         this.name = name;
     }
 
+    public void setCardColor(Colors color) {
+        super.cardColor = color;
+    }
+
+    @Override
+    public Colors getCardColor() {
+        return cardColor;
+    }
 }

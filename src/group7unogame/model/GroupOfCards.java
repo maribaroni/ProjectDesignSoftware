@@ -7,24 +7,22 @@ import java.util.ArrayList;
  * once. The group of cards has a maximum size attribute which is flexible for reuse.
  *
  * @author dancye
- * @modified Paul Bonenfant Jan 2020
- * GROUP 7:
- * @modified Mariana Baroni - April 10, 2020
- * @modified Danish Siddiqui - February 12, 2020
- * @modified Husam Haidarah - February 12, 2020
+ * @modified Paul Bonenfant Jan 2020 GROUP 7:
+ * @modified Mariana Baroni - April 17, 2020
  * @modified Katrina Metha - February 12, 2020
  */
 public abstract class GroupOfCards {
 
     //The group of cards, stored in an ArrayList
-    protected ArrayList<Card> cards;
+    private ArrayList<Card> cards;
     private int size;//the size of the grouping
 
-    public GroupOfCards(){}
-    
     public GroupOfCards(ArrayList<Card> cards, int size) {
         this.size = size;
         this.cards = cards;
+    }
+
+    public GroupOfCards() {
     }
 
     /**
@@ -55,5 +53,5 @@ public abstract class GroupOfCards {
     public void setCards(ArrayList<Card> cards) {
         this.cards = cards;
     }
-    
+
 }//end class

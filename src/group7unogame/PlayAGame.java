@@ -1,6 +1,7 @@
 package group7unogame;
 
 import group7unogame.model.Game;
+import group7unogame.model.GroupOfCards;
 import group7unogame.model.Player;
 import group7unogame.model.UnoDeck;
 import group7unogame.model.UnoGame;
@@ -15,10 +16,7 @@ import java.util.regex.Pattern;
  *
  * GROUP 7:
  *
- * @modified Mariana Baroni - April 10, 2020
- * @modified Danish Siddiqui - February 12, 2020
- * @modified Husam Haidarah - February 12, 2020
- * @modified Katrina Metha - February 12, 2020
+ * @modified Mariana Baroni - April 17, 2020
  */
 public class PlayAGame {
 
@@ -27,8 +25,9 @@ public class PlayAGame {
         //Data field
         Scanner input = new Scanner(System.in);
         String numberOfPlayers = "-1";
+        // UnoDeck drawPile = new UnoDeck();
         String gameChosen = "-1";
-        UnoDeck drawPile = new UnoDeck();
+
         final int handSize = 4;
 
         //Greeting players
@@ -41,8 +40,6 @@ public class PlayAGame {
         for ( Card i : cards){
             System.out.println(i.toString());
         }*/
-        
-        
         // A loop that presents options to the user until he wants to exit the application
         String regex1 = "[01]{1}";
         do {
@@ -62,7 +59,7 @@ public class PlayAGame {
             switch (gameChosen) {
 
                 case "0":
-                    
+
                     break;
 
                 case "1":
@@ -90,7 +87,7 @@ public class PlayAGame {
                         Player player = new UnoPlayer(input.nextLine().trim());
                         players.add((UnoPlayer) player);
                     }
-                    
+
                     //Set Players
                     uno.setPlayers(players);
 
@@ -99,7 +96,7 @@ public class PlayAGame {
                         uno.play();
                     }
             }
-        }  while (false); 
+        } while (false);
     }
-    
+
 }

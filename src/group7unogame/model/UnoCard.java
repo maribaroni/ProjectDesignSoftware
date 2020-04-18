@@ -5,14 +5,11 @@ package group7unogame.model;
  *
  * GROUP 7:
  *
- * @modified Mariana Baroni - April 11, 2020
- * @modified Danish Siddiqui - March, 2020
- * @modified Husam Haidarah - March, 2020
- * @modified Katrina Metha - March, 2020
+ * @modified Mariana Baroni - April 17, 2020
  */
 public class UnoCard extends Card {
 
-    protected Colors cardColor;
+    protected Colors cardColor; //shared with wildcard
     private Values cardValue;
 
     public enum Colors {
@@ -22,16 +19,17 @@ public class UnoCard extends Card {
     public enum Values {
         Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine
     };
-    
+
     public UnoCard(Colors cardColor, Values cardValue) {
         this.cardColor = cardColor;
         this.cardValue = cardValue;
     }
 
+    //Wildcard needs this constructor
     public UnoCard(Colors cardColor) {
         this.cardColor = cardColor;
     }
-    
+
     public Colors getCardColor() {
         return cardColor;
     }
@@ -42,7 +40,7 @@ public class UnoCard extends Card {
 
     @Override
     public String toString() {
-        return cardColor +" "+cardValue;
+        return cardColor + " " + cardValue;
     }
-    
+
 }
