@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package group7unogame.model;
 
 import static group7unogame.model.UnoGame.prepareDeck;
@@ -10,23 +5,18 @@ import static group7unogame.model.UnoGame.topCard;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
- *
- * @author maria
+ * JUnit test of UnoGame class
+ * 
+ * @author Mariana Baroni - April 19, 2020
  */
 public class UnoGameTest {
 
     public UnoGameTest() {
     }
 
-    /*@Test
-    public void testPlay() {
-        System.out.println("play");
-        UnoGame instance = null;
-        instance.play();
-        fail("The test case is a prototype.");
-    }*/
     @Test
     public void testDeclareWinnerGood() {
         System.out.println("declareWinnerGood");
@@ -39,10 +29,10 @@ public class UnoGameTest {
         deck = prepareDeck(deck);
         instance.declareWinner();
     }
-    
+
     @Test
     public void testDeclareWinnerBad() {
-        System.out.println("declareWinnerGood");
+        System.out.println("declareWinnerBad");
         UnoGame instance = new UnoGame("uno");
         UnoPlayer player = new UnoPlayer("Player1");
         ArrayList<Player> players = new ArrayList<>();
@@ -77,7 +67,7 @@ public class UnoGameTest {
         UnoGame.pickUpCards(player, numberOfCards);
         assertEquals(0, player.getHand().size());
     }
-    
+
     @Test
     public void testPickUpCardsBoundary() {
         System.out.println("pickUpCardsBoundary");
@@ -90,17 +80,6 @@ public class UnoGameTest {
         assertEquals(1, player.getHand().size());
     }
 
-
-    /*
-    @Test
-    public void testGetCardPlayed() {
-        System.out.println("getCardPlayed");
-        UnoGame instance = null;
-        UnoCard expResult = null;
-        UnoCard result = instance.getCardPlayed();
-        assertEquals(expResult, result);
-        fail("The test case is a prototype.");
-    }*/
     @Test
     public void testDistributeHandOfCardsGood() {
         System.out.println("distributeHandOfCardsGood");
@@ -137,7 +116,7 @@ public class UnoGameTest {
 
     @Test
     public void testDistributeHandOfCardsBoundary() {
-        System.out.println("distributeHandOfCardsBad");
+        System.out.println("distributeHandOfCardsBoundary");
         UnoGame instance = new UnoGame("uno");
         Player player = new UnoPlayer("Player1");
         ArrayList<Player> players = new ArrayList<>();
@@ -178,7 +157,7 @@ public class UnoGameTest {
 
     @Test
     public void testTopCardBoundary() {
-        System.out.println("topCardGood");
+        System.out.println("topCardBoundary");
         UnoGame instance = new UnoGame("uno");
         UnoDeck deck = instance.drawPile;
         deck = prepareDeck(deck);
@@ -187,4 +166,53 @@ public class UnoGameTest {
         boolean isColouredCard = !(card instanceof WildCard);
         assertTrue(deckSize == 43 && isColouredCard);
     }
+
+    @Test
+    public void testIsValideMoveGood() {
+        System.out.println("isValideMoveGood");
+        UnoGame.cardOnTop = new UnoCard(UnoCard.Colors.Red, UnoCard.Values.Zero);
+        UnoPlayer player = new UnoPlayer("Player1");
+        UnoCard cardDiscarded = new UnoCard(UnoCard.Colors.Red, UnoCard.Values.Zero);
+        UnoCard.Colors color = UnoGame.cardOnTop.getCardColor();
+        boolean expResult = true;
+        boolean result = UnoGame.isValideMove(player, cardDiscarded, color);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testIsValideMoveBad() {
+        System.out.println("isValideMoveBad");
+        UnoGame.cardOnTop = new UnoCard(UnoCard.Colors.Red, UnoCard.Values.Eight);
+        UnoPlayer player = new UnoPlayer("Player1");
+        UnoCard cardDiscarded = new UnoCard(UnoCard.Colors.Green, UnoCard.Values.One);
+        UnoCard.Colors color = UnoGame.cardOnTop.getCardColor();
+        boolean expResult = false;
+        boolean result = UnoGame.isValideMove(player, cardDiscarded, color);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testIsValideMoveBoundary1() {
+        System.out.println("isValideMoveBoundary1");
+        UnoGame.cardOnTop = new UnoCard(UnoCard.Colors.Red, UnoCard.Values.Eight);
+        UnoPlayer player = new UnoPlayer("Player1");
+        UnoCard cardDiscarded = new UnoCard(UnoCard.Colors.Red, UnoCard.Values.One);
+        UnoCard.Colors color = UnoGame.cardOnTop.getCardColor();
+        boolean expResult = true;
+        boolean result = UnoGame.isValideMove(player, cardDiscarded, color);
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testIsValideMoveBoundary2() {
+        System.out.println("isValideMoveBoundary2");
+        UnoGame.cardOnTop = new UnoCard(UnoCard.Colors.Red, UnoCard.Values.One);
+        UnoPlayer player = new UnoPlayer("Player1");
+        UnoCard cardDiscarded = new UnoCard(UnoCard.Colors.Green, UnoCard.Values.One);
+        UnoCard.Colors color = UnoGame.cardOnTop.getCardColor();
+        boolean expResult = true;
+        boolean result = UnoGame.isValideMove(player, cardDiscarded, color);
+        assertEquals(expResult, result);
+    }
+
 }

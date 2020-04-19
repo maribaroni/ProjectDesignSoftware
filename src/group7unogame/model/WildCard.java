@@ -1,12 +1,12 @@
 package group7unogame.model;
 
 /**
- * This class represents a wildcard. It is general enough to be instantiated for any Game. 
- * In case of UnoGame, the wildcard inherent color.
+ * This class represents a wildcard. It is general enough to be instantiated for any Game. In case of UnoGame, the
+ * wildcard inherent color.
  *
  * GROUP 7:
  *
- * @modified Mariana Baroni - April 17, 2020
+ * @modified Mariana Baroni - April 19, 2020
  */
 public class WildCard extends UnoCard {
 

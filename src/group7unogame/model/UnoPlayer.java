@@ -7,11 +7,17 @@ import java.util.regex.Pattern;
 /**
  * This class represents a Uno Player, with name and a group of cards.
  *
- * @author Mariana Baroni - April 17, 2020
+ * @author Mariana Baroni - April 19, 2020
  */
 public class UnoPlayer extends Player {
 
     private ArrayList<Card> hand;
+
+    private Scanner input = new Scanner(System.in);
+    public static UnoCard cardPlayed;
+
+    int countCards; //counter of options to the user
+    int counter = 0;
 
     public UnoPlayer(String name) {
         super(name);
@@ -25,12 +31,6 @@ public class UnoPlayer extends Player {
     public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
     }
-
-    private Scanner input = new Scanner(System.in);
-    public static UnoCard cardPlayed;
-
-    int countCards; //counter of options to the user
-    int counter = 0;
 
     @Override
     public void play() {
@@ -58,25 +58,7 @@ public class UnoPlayer extends Player {
             counterCards.add(countCards);
         }
 
-        //Regular expression of options
-        String regex = "[0-9]{1,}";
-
-        int userEnterInt = -1; //input of user in integer type
-
-        //Validation of user entry
-        do {
-            String userEnter = input.nextLine();
-            try {
-                userEnterInt = Integer.parseInt(userEnter);
-                if (Pattern.matches(regex, userEnter) && !counterCards.contains(userEnterInt)) {
-                    System.out.println("Please, enter a number among the options.");
-                } else {
-                    break;
-                }
-            } catch (NumberFormatException ex) {
-                System.out.println("Please, enter a number among the options.");
-            }
-        } while (true);
+        int userEnterInt = validateOption(counterCards);
 
         //Play a card from the hand
         if (counter == 0 && userEnterInt == countCards) {
@@ -113,6 +95,37 @@ public class UnoPlayer extends Player {
         if (getHand().size() == 1) {
             System.out.print("\n-----" + this.getName() + " says UNO------.\n");
         }
+    }
+
+    /**
+     * Method responsible to validate the option choose by the player among the possible options. It asks the user to
+     * another option if the option choose is invalid.
+     *
+     * @param counterCards is the possible options
+     * @return a valid choice
+     */
+    public int validateOption(ArrayList<Integer> counterCards) {
+        //Regular expression of options
+        String regex = "[0-9]{1,}";
+
+        int userEnterInt = -1; //input of user in integer type
+
+        //Validation of user entry
+        do {
+            String userEnter = input.nextLine();
+            try {
+                userEnterInt = Integer.parseInt(userEnter);
+                if (Pattern.matches(regex, userEnter) && !counterCards.contains(userEnterInt)) {
+                    System.out.println("Please, enter a number among the options.");
+                } else {
+                    break;
+                }
+            } catch (NumberFormatException ex) {
+                System.out.println("Please, enter a number among the options.");
+            }
+        } while (true);
+
+        return userEnterInt;
     }
 
 }

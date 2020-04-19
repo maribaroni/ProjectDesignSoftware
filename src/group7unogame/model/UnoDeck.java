@@ -6,7 +6,7 @@ import java.util.Collections;
 /**
  * This class represents a deck of Uno cards.
  *
- * @author Mariana Baroni - April 17, 2020
+ * @author Mariana Baroni - April 19, 2020
  */
 public class UnoDeck extends GroupOfCards {
 

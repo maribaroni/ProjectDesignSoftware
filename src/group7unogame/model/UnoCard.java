@@ -5,7 +5,7 @@ package group7unogame.model;
  *
  * GROUP 7:
  *
- * @modified Mariana Baroni - April 17, 2020
+ * @modified Mariana Baroni - April 19, 2020
  */
 public class UnoCard extends Card {
 

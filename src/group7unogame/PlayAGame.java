@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  *
  * GROUP 7:
  *
- * @modified Mariana Baroni - April 17, 2020
+ * @modified Mariana Baroni - April 19, 2020
  */
 public class PlayAGame {
 
@@ -27,7 +27,7 @@ public class PlayAGame {
         final int handSize = 4;
 
         //Greeting players
-        System.out.println("***** WELCOME PLAYERS *****");
+        System.out.println("\n***** WELCOME PLAYERS *****");
 
         // A loop that presents options to the user until he wants to exit the application
         String regex1 = "[01]{1}";

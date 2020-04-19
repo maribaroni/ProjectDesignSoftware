@@ -1,42 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package group7unogame.model;
 
 import static group7unogame.model.UnoGame.prepareDeck;
-import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * JUnit test of UnoPlayer class
  *
- * @author maria
+ * @author Mariana Baroni - April 19, 2020
  */
 public class UnoPlayerTest {
-    
+
     public UnoPlayerTest() {
     }
-
-   /* @Test
-    public void testPlayGood() {
-        System.out.println("playGood");
-        UnoGame uno = new UnoGame("uno");
-        UnoDeck deck = uno.drawPile;
-        deck = prepareDeck(deck);
-        UnoPlayer instance = new UnoPlayer("Player1");
-        ArrayList<Player> players = new ArrayList<>();
-        players.add(instance);
-        uno.setPlayers(players);
-        uno.distributeHandOfCards();
-        instance.play();
-        UnoCard card = instance.cardPlayed;
-        System.out.println(card.toString());
-       // boolean cardColoured = !(card instanceof WildCard);
-       // boolean cardWildCard = (card instanceof WildCard);
-      //  assertTrue(cardColoured || cardWildCard);
-    }*/
 
     @Test
     public void testAddCardToHand() {
@@ -60,8 +36,8 @@ public class UnoPlayerTest {
         UnoGame.pickUpCards(instance, 1);
         instance.sayUno();
     }
-    
-        @Test
+
+    @Test
     public void testSayUnoBad() {
         System.out.println("sayUnoGood");
         UnoGame uno = new UnoGame("uno");
@@ -72,7 +48,7 @@ public class UnoPlayerTest {
         instance.sayUno();
     }
 
-            @Test
+    @Test
     public void testSayUnoBoundary() {
         System.out.println("sayUnoGood");
         UnoGame uno = new UnoGame("uno");
@@ -82,4 +58,5 @@ public class UnoPlayerTest {
         UnoGame.pickUpCards(instance, 2);
         instance.sayUno();
     }
+
 }

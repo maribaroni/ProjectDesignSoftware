@@ -5,8 +5,7 @@ package group7unogame.model;
  *
  * @author dancye GROUP 7:
  * @modified Paul Bonenfant Jan 2020
- * @modified Mariana Baroni - April 17, 2020
- * @modified Katrina Metha - February 12, 2020
+ * @modified Mariana Baroni - April 19, 2020
  */
 public abstract class Player {
 

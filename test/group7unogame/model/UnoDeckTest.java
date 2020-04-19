@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package group7unogame.model;
 
 import java.util.ArrayList;
@@ -10,8 +5,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * JUnit test of UnoDeck class
  *
- * @author maria
+ * @author Mariana Baroni - April 19, 2020
  */
 public class UnoDeckTest {
 
@@ -94,7 +90,6 @@ public class UnoDeckTest {
         for (UnoCard card : cardsInstance) {
             UnoCard card2 = cardsInstanceShuffle.get(countCard);
             if ((card instanceof WildCard) && (card2 instanceof WildCard)) {
-                System.out.println("Enter");
                 countEquals++;
             } else {
                 if ((card instanceof WildCard) && !(card2 instanceof WildCard)) {
