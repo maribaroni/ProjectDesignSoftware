@@ -70,13 +70,4 @@ public class UnoDeck extends GroupOfCards {
         Collections.shuffle(unoCards);
     }
 
-    /**
-     * Method responsible for add one card to the deck (in case a discard pile, for example)
-     *
-     * @param card
-     */
-    public void addToDeck(UnoCard card) {
-        unoCards.add(card);
-    }
-
 }

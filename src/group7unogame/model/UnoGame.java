@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class UnoGame extends Game {
 
     private static UnoDeck drawPile;
-    private ArrayList<Card> discardPile = new ArrayList<>();
+    private static ArrayList<Card> discardPile = new ArrayList<>();
     public static UnoCard cardOnTop;
-    static final int HAND_SIZE = 10;
+    static final int HAND_SIZE = 4;
 
     public UnoGame(String name) {
         super(name);
@@ -26,16 +26,10 @@ public class UnoGame extends Game {
         ArrayList<Player> players = super.players;
 
         //Preparing the deck 
-        drawPile.generateDeck();
-        drawPile.shuffle(); //Shuffle the cards
+        drawPile =  prepareDeck(drawPile);
 
         //Preparing the hand of players
-        for (Player player : players) {
-            for (int i = 0; i < HAND_SIZE; i++) {
-                //populates hand and remove the card from the deck
-                pickUpCards(player, 1);
-            }
-        }
+        distributeHandOfCards();
 
         //Store players with a hand of cards
         setPlayers(players);
@@ -134,7 +128,7 @@ public class UnoGame extends Game {
         for (Player player : getPlayers()) {
             if (((UnoPlayer) player).getHand().isEmpty()) {
                 System.out.println("\n" + player.getName() + " has won.");
-                System.exit(0);
+             //   System.exit(0);
             }
         }
     }
@@ -146,15 +140,16 @@ public class UnoGame extends Game {
      * @return a card
      */
     public static UnoCard topCard(UnoDeck deckUno) {
+        UnoCard card;
         int i = 1;
-        UnoCard card = deckUno.getUnoCards().get(deckUno.getUnoCards().size() - i); //pick the last card
+        do {
+        
+        card = deckUno.getUnoCards().get(deckUno.getUnoCards().size() - i); //pick the last card
+        i++;
         //If the first topCard is a wildcard, try another from the deck
-        while (card instanceof WildCard) {
-            i++;
-            card = deckUno.getUnoCards().get(deckUno.getUnoCards().size() - i);
-        }
+        } while (card instanceof WildCard);// {
         deckUno.getUnoCards().remove(card); //remove the card from the deck
-        deckUno.setSize(deckUno.getUnoCards().size() - 1); //set the new size to the deck
+        discardPile.add(card); //update discard Pile
         return card;
     }
 
@@ -165,10 +160,12 @@ public class UnoGame extends Game {
      * @param numberOfCards to be picked
      */
     public static void pickUpCards(Player player, int numberOfCards) {
-        UnoCard card = drawPile.getUnoCards().get(drawPile.getUnoCards().size() - 1); //pick the last card
-        drawPile.getUnoCards().remove(card); //remove the card from the deck
-        ((UnoPlayer) player).addCardToHand(card); //add a Card to the hand's player
-        drawPile.setSize(drawPile.getUnoCards().size()); //set the new size to the deck
+        for (int i = 0; i < numberOfCards; i++) {
+            UnoCard card = drawPile.getUnoCards().get(drawPile.getUnoCards().size() - 1); //pick the last card
+            drawPile.getUnoCards().remove(card); //remove the card from the deck
+            ((UnoPlayer) player).addCardToHand(card); //add a Card to the hand's player
+            drawPile.setSize(drawPile.getUnoCards().size()); //set the new size to the deck
+        }
     }
 
     /**
@@ -179,5 +176,25 @@ public class UnoGame extends Game {
     public UnoCard getCardPlayed() {
         return UnoPlayer.cardPlayed;//unoCard;
     }
+    
+    /**
+     * Method responsible for populate the hand of each player
+     */
+    public void distributeHandOfCards() {
+        for (Player player : players) {
+            //populates hand and remove the card from the deck
+            pickUpCards(player, HAND_SIZE);
+        }
+    }
+    
+    /**
+     * Method responsible to prepare a UnoDeck with all cards
+     */
+    public static UnoDeck prepareDeck(UnoDeck deck){
+        deck.generateDeck();
+        deck.shuffle();
+        return deck;
+    }
+    
 
 }

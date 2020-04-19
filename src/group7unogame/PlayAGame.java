@@ -34,7 +34,7 @@ public class PlayAGame {
         do {
 
             //Ask which game they want to play
-            System.out.println("\nWhat card game do you wanna to play? Digit 1 for Uno or 0 to exit the application.");
+            System.out.println("\nWhat card game do you wanna play? Digit 1 for Uno or 0 to exit the application.");
             //Validate input
             gameChosen = input.nextLine();
             if (!Pattern.matches(regex1, gameChosen)) {
