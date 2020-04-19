@@ -5,7 +5,6 @@ import static group7unogame.model.UnoGame.topCard;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * JUnit test of UnoGame class

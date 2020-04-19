@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class UnoGame extends Game {
 
-    protected static UnoDeck drawPile;
+    private static UnoDeck drawPile;
     private static ArrayList<Card> discardPile = new ArrayList<>();
     public static UnoCard cardOnTop;
     static final int HAND_SIZE = 4;
@@ -101,7 +101,7 @@ public class UnoGame extends Game {
         for (Player player : getPlayers()) {
             if (((UnoPlayer) player).getHand().isEmpty()) {
                 System.out.println("\n" + player.getName() + " has won.");
-                //   System.exit(0);
+                System.exit(0);
             }
         }
     }
